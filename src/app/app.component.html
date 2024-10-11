@@ -1,0 +1,27 @@
+<div class="vw-100 vh-100 d-flex justify-content-center align-items-center">
+  <div class="card col-6  d-grid align-items-center justify-content-center">
+    <form class="d-flex flex-column w-100 col-6 my-3" [formGroup]="form"
+      [appMatchPassword]="['password', 'confirmPassword']" (ngSubmit)="onSubmit()">
+      <div class="form-floating w-100 mt-3">
+        <input class="form-control" id="floatingInput" type="password" formControlName="password" />
+        <label for="password">Password:</label>
+      </div>
+
+      <div class="form-floating w-100 mt-3">
+        <input type="password" id="floatingInput" class="form-control" formControlName="confirmPassword" />
+        <label title="Confirm Password" for="confirmPassword">Confirm Password:</label>
+        @if (form.get('confirmPassword')?.hasError('passwordMismatch') &&
+        form.get('confirmPassword')?.touched) {
+        <div class="text-danger fs-6 m-2">
+          Password and Confirm Password do not match!
+        </div>
+        }
+
+      </div>
+
+      <button class="btn btn-primary mt-3" type="submit" [disabled]="form.invalid">
+        Submit
+      </button>
+    </form>
+  </div>
+</div>
